@@ -1,5 +1,6 @@
 package br.com.instacoffe.app.controllers;
 
+import br.com.instacoffe.app.domain.models.User;
 import br.com.instacoffe.app.dtos.request.UserRequestDto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,5 +44,31 @@ class UserControllerTest {
         resultActions.andExpect(status().isBadRequest());
     }
 
+    @DisplayName("POST - should returns 400 if no email is provided")
+    @Test
+    void addUserShouldReturnsBadRequestWhenNoEmailIsProvided() throws Exception{
+        UserRequestDto requestDto = new UserRequestDto("any_name", null);
+        String jsonBody = objectMapper.writeValueAsString(requestDto);
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(jsonBody));
+        resultActions.andExpect(status().isBadRequest());
+    }
+/*
+    @DisplayName("POST- Should returns 400 if invalid e-amail is provided")
+    @Test
+    void addUserShouldReturnsBadRequestWhenInvalidEmailIsProvided() throws Exception{
+        UserRequestDto requestDto = new UserRequestDto("any_name", "any_mail");
+        String jsonBody = objectMapper.writeValueAsString(requestDto);
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(jsonBody)
+        );
+        resultActions.andExpect(status().isBadRequest());
+    }
+    */
+ 
 
 }
