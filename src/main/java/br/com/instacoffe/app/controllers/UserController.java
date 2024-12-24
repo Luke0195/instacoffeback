@@ -2,7 +2,6 @@ package br.com.instacoffe.app.controllers;
 
 import br.com.instacoffe.app.dtos.request.UserRequestDto;
 import br.com.instacoffe.app.dtos.response.UserResponseDto;
-import br.com.instacoffe.app.services.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

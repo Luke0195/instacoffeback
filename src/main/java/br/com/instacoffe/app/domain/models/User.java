@@ -1,5 +1,6 @@
 package br.com.instacoffe.app.domain.models;
 
+
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -9,12 +10,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
 import java.util.Date;
 
+@Document(collection = "users")
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Getter
 @Setter
-@Document(collection = "users")
+@Builder
 public class User implements Serializable {
 
     @Id
@@ -25,4 +26,5 @@ public class User implements Serializable {
     private Date createdAt;
     @LastModifiedDate
     private Date updatedAt;
+
 }
