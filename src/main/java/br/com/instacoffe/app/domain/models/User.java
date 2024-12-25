@@ -11,11 +11,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Document(collection = "users")
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Builder
 public class User implements Serializable {
 
     @Id
@@ -27,4 +22,53 @@ public class User implements Serializable {
     @LastModifiedDate
     private Date updatedAt;
 
+    public User(){};
+
+    public User(String id, String name, String email, Date createdAt, Date updatedAt) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

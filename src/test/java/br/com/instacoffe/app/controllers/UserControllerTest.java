@@ -55,8 +55,8 @@ class UserControllerTest {
                 .content(jsonBody));
         resultActions.andExpect(status().isBadRequest());
     }
-/*
-    @DisplayName("POST- Should returns 400 if invalid e-amail is provided")
+
+    @DisplayName("POST- Should returns 400 if invalid e-mail is provided")
     @Test
     void addUserShouldReturnsBadRequestWhenInvalidEmailIsProvided() throws Exception{
         UserRequestDto requestDto = new UserRequestDto("any_name", "any_mail");
@@ -68,7 +68,7 @@ class UserControllerTest {
         );
         resultActions.andExpect(status().isBadRequest());
     }
-    */
+
  
 
 }

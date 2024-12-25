@@ -4,10 +4,10 @@
 
 > ### Casos de Sucesso
 
-* [ ] Recebi requisição do tipo  <b> POST </b> na rota /users.
-* [ ] Válida os campos obrigatórios <b> name </b> e <b> email </b>.
-* [ ] Válida se o campo e-mail é um e-mail válido.
-* [ ] Válida se já existe um usuário com um e-mail fornecido.
+* [X] Recebi requisição do tipo  <b> POST </b> na rota /users.
+* [X] Válida os campos obrigatórios <b> name </b> e <b> email </b>.
+* [X] Válida se o campo e-mail é um e-mail válido.
+* [X] Válida se já existe um usuário com um e-mail fornecido.
 * [ ] Cria um usuário com os dados informados.
 * [ ] Retorna <b> 201 </b> com os dados cadastrado do usuário.
 
