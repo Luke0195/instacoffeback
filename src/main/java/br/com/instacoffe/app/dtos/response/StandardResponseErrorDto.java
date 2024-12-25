@@ -1,11 +1,10 @@
 package br.com.instacoffe.app.dtos.response;
 
-import org.springframework.validation.FieldError;
 
 import java.time.Instant;
 import java.util.Set;
 
-public record StandardResponseErrorDto(Instant timestamp, Integer status, String error, String message, String path, Set<FieldError> errors) {
+public record StandardResponseErrorDto(Instant timestamp, Integer status, String error, String message, String path, Set<FieldResponseDto> errors) {
 
     @Override
     public Instant timestamp() {
@@ -33,7 +32,7 @@ public record StandardResponseErrorDto(Instant timestamp, Integer status, String
     }
 
     @Override
-    public Set<FieldError> errors() {
+    public Set<FieldResponseDto> errors() {
         return errors;
     }
 }

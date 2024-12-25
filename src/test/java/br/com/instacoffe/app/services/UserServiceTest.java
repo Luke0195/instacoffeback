@@ -19,7 +19,6 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 class UserServiceTest {

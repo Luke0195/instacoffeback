@@ -36,9 +36,6 @@ public class User implements Serializable {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -60,15 +57,9 @@ public class User implements Serializable {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+
 }

@@ -8,14 +8,16 @@ import br.com.instacoffe.app.repositories.UserRepository;
 import br.com.instacoffe.app.services.exceptions.ResourceAlreadyExistsException;
 import lombok.AllArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
+
 public class UserService implements AddUser {
 
+    @Autowired
     private UserRepository repository;
 
     @Override

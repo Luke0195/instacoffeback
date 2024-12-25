@@ -1,6 +1,5 @@
 package br.com.instacoffe.app.dtos.response;
 
-import br.com.instacoffe.app.domain.models.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
@@ -28,15 +27,4 @@ public record UserResponseDto(
         return email;
     }
 
-    @Override
-    public Date createdAt() {
-        return createdAt;
-    }
-
-    @Override
-    public Date updatedAt() {
-        return updatedAt;
-    }
-
-   
 }

@@ -3,10 +3,12 @@ package br.com.instacoffe.app.controllers;
 import br.com.instacoffe.app.domain.models.User;
 import br.com.instacoffe.app.dtos.request.UserRequestDto;
 
+import br.com.instacoffe.app.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,8 +33,10 @@ class UserControllerTest {
     private MockMvc mockMvc;
 
     private UserRequestDto userRequestDto;
+    @Autowired
+    private UserService userService;
 
-    @DisplayName("POST- should returns 400 if no name is provided")
+    @DisplayName("POST- Should returns 400 if no name is provided")
     @Test
     void addUserShouldReturnsBadRequestWhenNoNameIsProvided()throws Exception{
         UserRequestDto requestDto = new UserRequestDto(null, "any_mail@mail.com");
@@ -44,7 +48,7 @@ class UserControllerTest {
         resultActions.andExpect(status().isBadRequest());
     }
 
-    @DisplayName("POST - should returns 400 if no email is provided")
+    @DisplayName("POST - Should returns 400 if no email is provided")
     @Test
     void addUserShouldReturnsBadRequestWhenNoEmailIsProvided() throws Exception{
         UserRequestDto requestDto = new UserRequestDto("any_name", null);
