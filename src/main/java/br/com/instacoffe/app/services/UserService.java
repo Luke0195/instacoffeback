@@ -5,6 +5,7 @@ import br.com.instacoffe.app.domain.usecases.AddUser;
 import br.com.instacoffe.app.dtos.request.UserRequestDto;
 import br.com.instacoffe.app.dtos.response.UserResponseDto;
 import br.com.instacoffe.app.repositories.UserRepository;
+import br.com.instacoffe.app.services.exceptions.ResourceAlreadyExistsException;
 import lombok.AllArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class UserService implements AddUser {
     @Override
     public UserResponseDto add(UserRequestDto userRequestDto) {
       Optional<User> userAlreadyExists = repository.findByEmail(userRequestDto.email());
-      if(userAlreadyExists.isPresent()) throw new RuntimeException("This e-mail is already taken");
+      if(userAlreadyExists.isPresent()) throw new ResourceAlreadyExistsException("This e-mail is already taken");
       return null;
 
     }
