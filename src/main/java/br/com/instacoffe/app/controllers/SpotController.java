@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/spots")
@@ -20,7 +23,8 @@ public class SpotController {
 
     @PostMapping
     public ResponseEntity<SpotResponseDto> addSpot(@Valid @RequestBody SpotRequestDto spotRequestDto){
-        service.add(spotRequestDto);
-        return null;
+      SpotResponseDto spotResponseDto =   service.add(spotRequestDto);
+      URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(spotResponseDto.id()).toUri();
+      return ResponseEntity.created(uri).body(spotResponseDto);
     }
 }

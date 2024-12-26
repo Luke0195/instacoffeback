@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -36,7 +37,7 @@ class SpotControllerTest {
     private MockMvc mockMvc;
 
     private SpotRequestDto spotRequestDto;
-    @Autowired
+    @MockitoBean
     private SpotService spotService;
     @Autowired
     private SpotRepository spotRepository;
@@ -62,8 +63,8 @@ class SpotControllerTest {
     @DisplayName("POST- Should returns 201 when valid data is provided")
     @Test
     void addSpotShouldReturnsAnSpotWhenValidDataIsProvided() throws  Exception{
-
         spotRequestDto = new SpotRequestDto("any_name", "any_thumbnail", BigDecimal.valueOf(30.0), new String[]{"React"});
+        Mockito.when(spotService.add(Mockito.any(SpotRequestDto.class))).thenReturn(new SpotResponseDto("valid_id", "any_name", "any_thumbnail", BigDecimal.valueOf(30.0), new String[]{"React"}, new Date(), null));
         String jsonBody = objectMapper.writeValueAsString(spotRequestDto);
         ResultActions resultActions = mockMvc.perform(post("/spots")
                 .accept(MediaType.APPLICATION_JSON)
