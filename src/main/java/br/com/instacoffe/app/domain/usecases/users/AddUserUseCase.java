@@ -1,9 +1,9 @@
-package br.com.instacoffe.app.domain.usecases;
+package br.com.instacoffe.app.domain.usecases.users;
 
 import br.com.instacoffe.app.dtos.request.UserRequestDto;
 import br.com.instacoffe.app.dtos.response.UserResponseDto;
 
-public interface AddUser {
+public interface AddUserUseCase {
 
     UserResponseDto add(UserRequestDto userRequestDto);
 

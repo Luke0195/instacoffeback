@@ -1,12 +1,11 @@
 package br.com.instacoffe.app.services;
 
 import br.com.instacoffe.app.domain.models.User;
-import br.com.instacoffe.app.domain.usecases.AddUser;
+import br.com.instacoffe.app.domain.usecases.users.AddUserUseCase;
 import br.com.instacoffe.app.dtos.request.UserRequestDto;
 import br.com.instacoffe.app.dtos.response.UserResponseDto;
 import br.com.instacoffe.app.repositories.UserRepository;
 import br.com.instacoffe.app.services.exceptions.ResourceAlreadyExistsException;
-import lombok.AllArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,7 @@ import java.util.Optional;
 
 @Service
 
-public class UserService implements AddUser {
+public class UserService implements AddUserUseCase {
 
     @Autowired
     private UserRepository repository;
