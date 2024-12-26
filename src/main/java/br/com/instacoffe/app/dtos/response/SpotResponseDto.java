@@ -7,7 +7,7 @@ public record SpotResponseDto(
         String id,
         String name,
         String thumbnail,
-        BigDecimal price,
+        Double price,
         String[] techs,
         Date createdAt,
         Date updatedAt
@@ -28,7 +28,7 @@ public record SpotResponseDto(
     }
 
     @Override
-    public BigDecimal price() {
+    public Double price() {
         return price;
     }
 

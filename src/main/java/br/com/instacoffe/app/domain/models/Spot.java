@@ -16,7 +16,7 @@ public class Spot implements Serializable {
     private String id;
     private String name;
     private String thumbnail;
-    private BigDecimal price;
+    private Double price;
     private String[] techs;
     @CreatedDate
     private Date createdAt;
@@ -26,7 +26,7 @@ public class Spot implements Serializable {
 
     public Spot(){};
 
-    public Spot(String id, String name, String thumbnail, BigDecimal price, String[] techs, Date createdAt, Date updatedAt){
+    public Spot(String id, String name, String thumbnail, Double price, String[] techs, Date createdAt, Date updatedAt){
         this.id = id;
         this.name = name;
         this.thumbnail = thumbnail;
@@ -58,11 +58,11 @@ public class Spot implements Serializable {
         this.thumbnail = thumbnail;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

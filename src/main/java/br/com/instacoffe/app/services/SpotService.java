@@ -9,6 +9,7 @@ import br.com.instacoffe.app.services.exceptions.ResourceAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
@@ -27,13 +28,13 @@ public class SpotService implements AddSpotUseCase {
        return new SpotResponseDto(spot.getId(), spot.getName(), spot.getThumbnail(), spot.getPrice(), spot.getTechs(), spot.getCreatedAt(), spot.getUpdatedAt());
     }
 
-
     private static Spot makeSpot(SpotRequestDto spotRequestDto){
-        Spot spot = new Spot();
-        spot.setName(spotRequestDto.name());
-        spot.setThumbnail(spotRequestDto.thumbnail());
-        spot.setTechs(spot.getTechs());
-        spot.setPrice(spot.getPrice());
-        return spot;
+     Spot spot = new Spot();
+     spot.setName(spotRequestDto.name());
+     spot.setThumbnail(spotRequestDto.thumbnail());
+     spot.setTechs(spotRequestDto.techs());
+     spot.setPrice(spotRequestDto.price());
+     return spot;
     }
+
 }

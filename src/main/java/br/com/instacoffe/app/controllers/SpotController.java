@@ -23,7 +23,7 @@ public class SpotController {
 
     @PostMapping
     public ResponseEntity<SpotResponseDto> addSpot(@Valid @RequestBody SpotRequestDto spotRequestDto){
-      SpotResponseDto spotResponseDto =   service.add(spotRequestDto);
+      SpotResponseDto spotResponseDto = service.add(spotRequestDto);
       URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(spotResponseDto.id()).toUri();
       return ResponseEntity.created(uri).body(spotResponseDto);
     }

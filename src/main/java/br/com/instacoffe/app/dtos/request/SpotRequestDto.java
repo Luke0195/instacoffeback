@@ -9,7 +9,7 @@ public record SpotRequestDto(
         @NotEmpty(message = "The field name must be required")
         String name,
         String thumbnail,
-        BigDecimal price,
+        Double price,
         @NotNull(message = "The field techs must be required")
         String[] techs) {
 
@@ -24,7 +24,7 @@ public record SpotRequestDto(
     }
 
     @Override
-    public BigDecimal price() {
+    public Double price() {
         return price;
     }
 
