@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+   db:
+      image: mongo
+      restart: always
+      ports:
+        - "27017:27017"
+      volumes:
+        - mongo-data:/data/mongo
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: root
+   redis:
+     image: redis:latest
+     container_name: redis-server
+     ports:
+       - "6379:6379"
+     volumes:
+       - redis-data:/data/redis
+     command: ["redis-server", "--appendonly", "yes"]
+
+
+
+volumes:
+  redis-data:
+    driver: local
+  mongo-data:
+    driver: local

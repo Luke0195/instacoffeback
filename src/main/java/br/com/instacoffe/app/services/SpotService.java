@@ -5,10 +5,11 @@ import br.com.instacoffe.app.domain.usecases.spots.AddSpotUseCase;
 import br.com.instacoffe.app.domain.usecases.spots.LoadSpotsUseCase;
 import br.com.instacoffe.app.dtos.request.SpotRequestDto;
 import br.com.instacoffe.app.dtos.response.SpotResponseDto;
-import br.com.instacoffe.app.dtos.response.UserResponseDto;
+
 import br.com.instacoffe.app.repositories.SpotRepository;
 import br.com.instacoffe.app.services.exceptions.ResourceAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class SpotService implements AddSpotUseCase, LoadSpotsUseCase {
     }
 
     @Override
+    @Cacheable(value = "users")
     public List<SpotResponseDto> findAllUsers() {
         List<Spot> spots = repository.findAll();
         return spots.stream().map(SpotService::makeSpotResponseDto).toList();
