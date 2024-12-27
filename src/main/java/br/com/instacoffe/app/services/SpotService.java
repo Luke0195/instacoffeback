@@ -2,18 +2,20 @@ package br.com.instacoffe.app.services;
 
 import br.com.instacoffe.app.domain.models.Spot;
 import br.com.instacoffe.app.domain.usecases.spots.AddSpotUseCase;
+import br.com.instacoffe.app.domain.usecases.spots.LoadSpotsUseCase;
 import br.com.instacoffe.app.dtos.request.SpotRequestDto;
 import br.com.instacoffe.app.dtos.response.SpotResponseDto;
+import br.com.instacoffe.app.dtos.response.UserResponseDto;
 import br.com.instacoffe.app.repositories.SpotRepository;
 import br.com.instacoffe.app.services.exceptions.ResourceAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SpotService implements AddSpotUseCase {
+public class SpotService implements AddSpotUseCase, LoadSpotsUseCase {
 
     @Autowired
     private SpotRepository repository;
@@ -28,6 +30,13 @@ public class SpotService implements AddSpotUseCase {
        return new SpotResponseDto(spot.getId(), spot.getName(), spot.getThumbnail(), spot.getPrice(), spot.getTechs(), spot.getCreatedAt(), spot.getUpdatedAt());
     }
 
+    @Override
+    public List<SpotResponseDto> findAllUsers() {
+        List<Spot> spots = repository.findAll();
+        return spots.stream().map(SpotService::makeSpotResponseDto).toList();
+    }
+
+
     private static Spot makeSpot(SpotRequestDto spotRequestDto){
      Spot spot = new Spot();
      spot.setName(spotRequestDto.name());
@@ -36,5 +45,10 @@ public class SpotService implements AddSpotUseCase {
      spot.setPrice(spotRequestDto.price());
      return spot;
     }
+
+    private static SpotResponseDto makeSpotResponseDto(Spot spot){
+        return new SpotResponseDto(spot.getId(), spot.getName(), spot.getThumbnail(), spot.getPrice(), spot.getTechs(),spot.getCreatedAt(), spot.getUpdatedAt());
+    }
+
 
 }
