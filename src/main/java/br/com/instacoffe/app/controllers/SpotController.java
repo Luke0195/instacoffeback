@@ -30,6 +30,7 @@ public class SpotController {
 
     @GetMapping
     public ResponseEntity<List<SpotResponseDto>> loadSpots(){
-        return ResponseEntity.status(HttpStatus.OK).body(List.of(new SpotResponseDto("id", "any_name", "any_thumb", 30.0, new String[]{"Java"}, new Date(), null )));
+        List<SpotResponseDto> spots = service.findAllUsers();
+        return ResponseEntity.status(HttpStatus.OK).body(spots);
     }
 }
