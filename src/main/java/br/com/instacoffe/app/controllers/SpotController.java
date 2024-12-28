@@ -33,4 +33,5 @@ public class SpotController {
         List<SpotResponseDto> spots = service.findAllUsers();
         return ResponseEntity.status(HttpStatus.OK).body(spots);
     }
+
 }

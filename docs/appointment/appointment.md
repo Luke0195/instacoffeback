@@ -2,7 +2,7 @@
 
 > ### Casos de Sucesso.
 
-/spots/id/appoinent/register
+
 - [ ] Recebe uma requisição do tipo <b> POST </b> /spots/:spotId/appointment.
 - [ ] Valida os campos obrigatórios <b> userId</b>, <b>spotId</b>,<b> data</b>.
 - [ ] O agendamento do spot começa com reserva não aprovada.

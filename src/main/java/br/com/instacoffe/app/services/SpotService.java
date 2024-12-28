@@ -1,6 +1,7 @@
 package br.com.instacoffe.app.services;
 
 import br.com.instacoffe.app.domain.models.Spot;
+import br.com.instacoffe.app.domain.usecases.appointment.AddAppointmentUseCase;
 import br.com.instacoffe.app.domain.usecases.spots.AddSpotUseCase;
 import br.com.instacoffe.app.domain.usecases.spots.LoadSpotsUseCase;
 import br.com.instacoffe.app.dtos.request.SpotRequestDto;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SpotService implements AddSpotUseCase, LoadSpotsUseCase {
+public class SpotService implements AddSpotUseCase, LoadSpotsUseCase, AddAppointmentUseCase {
 
     @Autowired
     private SpotRepository repository;
@@ -53,4 +54,8 @@ public class SpotService implements AddSpotUseCase, LoadSpotsUseCase {
     }
 
 
+    @Override
+    public Object addAppointment(Object object) {
+        return null;
+    }
 }
