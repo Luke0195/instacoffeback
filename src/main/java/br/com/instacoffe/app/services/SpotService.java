@@ -27,14 +27,16 @@ import java.util.Optional;
 @Service
 public class SpotService implements AddSpotUseCase, LoadSpotsUseCase, AddAppointmentUseCase {
 
-    @Autowired
-    private SpotRepository spotRepository;
+    private final SpotRepository spotRepository;
+    private final UserRepository userRepository;
+    private final AppointmentRepository appointmentRepository;
 
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private AppointmentRepository appointmentRepository;
-
+    public SpotService(SpotRepository spotRepository, UserRepository userRepository, AppointmentRepository appointmentRepository){
+        this.spotRepository = spotRepository;
+        this.userRepository = userRepository;
+        this.appointmentRepository = appointmentRepository;
+    }
 
     @Override
     public SpotResponseDto add(SpotRequestDto spotRequestDto) {

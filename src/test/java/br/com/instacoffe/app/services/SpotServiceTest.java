@@ -6,6 +6,7 @@ import br.com.instacoffe.app.dtos.request.SpotRequestDto;
 
 import br.com.instacoffe.app.dtos.response.AppointmentResponseDto;
 import br.com.instacoffe.app.dtos.response.SpotResponseDto;
+import br.com.instacoffe.app.factories.SpotFactory;
 import br.com.instacoffe.app.repositories.SpotRepository;
 import br.com.instacoffe.app.repositories.UserRepository;
 import br.com.instacoffe.app.services.exceptions.ResourceAlreadyExistsException;
@@ -21,7 +22,7 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
-import java.util.Date;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -40,30 +41,27 @@ class SpotServiceTest {
     private SpotService spotService;
 
     private SpotRequestDto spotRequestDto;
+    private Spot spot;
+    private SpotResponseDto spotResponseDto;
+    private AppointmentRequestDto appointmentRequestDto;
 
-    private Spot existingSpot;
-
-    private AppointmentRequestDto validAppointmentRequestDto;
-
-    private AppointmentResponseDto appointmentResponseDto;
-
-    private void setUpValues(){
-        this.existingSpot = new Spot("any_id", "any_name", "any_thumbnail", 30.0, new String[]{"java"}, new Date(), null);
-        this.validAppointmentRequestDto = new AppointmentRequestDto("valid_user_id", "2024-12-28");
-
-
+    private void setupValues(){
+        this.spotRequestDto = SpotFactory.makeSpotRequestDto();
+        this.spot = SpotFactory.makeSpot(spotRequestDto);
+        this.spotResponseDto = SpotFactory.makeSpotResponseDto(spot);
     }
 
     @BeforeEach
     void setup(){
-        this.setUpValues();
+        setupValues();
     }
 
 
     @DisplayName("add should throws ResourceAlreadyExists if the spot name is already taken")
     @Test
     void addShouldThrowsResourceAlreadyExistsIfSpotNameIsAlreadyTaken(){
-        Mockito.when(spotRepository.findByName(Mockito.any())).thenReturn(Optional.of(this.existingSpot));
+        Mockito.when(spotRepository.findByName(Mockito.anyString()))
+                .thenReturn(Optional.of(SpotFactory.makeSpot(SpotFactory.makeSpotRequestDto())));
         Assertions.assertThrows(ResourceAlreadyExistsException.class, () -> {
             spotService.add(spotRequestDto);
         });
@@ -73,7 +71,7 @@ class SpotServiceTest {
     @Test
     void addShouldReturnsASpotWhenValidDataIsProvided(){;
      Mockito.when(spotRepository.findByName(spotRequestDto.name())).thenReturn(Optional.empty());
-     Mockito.when(spotRepository.save(Mockito.any())).thenReturn(this.existingSpot);
+     Mockito.when(spotRepository.save(Mockito.any())).thenReturn(spot);
      SpotResponseDto spotResponseDto = spotService.add(spotRequestDto);
      Assertions.assertNotNull(spotResponseDto.id());
      Assertions.assertEquals("valid_name", spotResponseDto.name());
@@ -82,7 +80,7 @@ class SpotServiceTest {
     @DisplayName("loadSpots should returns a list of spots")
     @Test
     void loadSpotsReturnsAnSpot(){
-        Mockito.when(spotRepository.findAll()).thenReturn(List.of(this.existingSpot));
+        Mockito.when(spotRepository.findAll()).thenReturn(List.of(SpotFactory.makeSpot(spotRequestDto)));
         List<SpotResponseDto> responseDtoList = spotService.findAllUsers();
         Assertions.assertEquals(1, responseDtoList.size());
     }
@@ -95,7 +93,7 @@ class SpotServiceTest {
         String notExistingSpot = "invalid_spot_id";
         Mockito.when(spotRepository.findById(Mockito.any())).thenThrow(ResourceNotFoundException.class);
         Assertions.assertThrows(ResourceNotFoundException.class, () -> {
-            spotService.addAppointment(notExistingSpot, this.validAppointmentRequestDto);
+            spotService.addAppointment(notExistingSpot, appointmentRequestDto);
         });
     }
 
@@ -104,23 +102,15 @@ class SpotServiceTest {
     void addAppointmentShouldThrowsIfUserIdNotExists(){
         String validSpotId = "valid_id";
         AppointmentRequestDto invalidAppointRequestDto = new AppointmentRequestDto("invalid_id", "2024-12-28");
-        Mockito.when(spotRepository.findById(validSpotId)).thenReturn(Optional.of(this.existingSpot));
+        Mockito.when(spotRepository.findById(validSpotId)).thenReturn(Optional.of(this.spot));
         Mockito.when(userRepository.findById(Mockito.any())).thenReturn(Optional.empty());
         Assertions.assertThrows(ResourceNotFoundException.class, () -> {
             spotService.addAppointment(validSpotId, invalidAppointRequestDto);
         });
     }
 
-    /*
-    @DisplayName("addAppointment should returns an appointment when valid data is provided")
-    @Test
-    void addAppointmentShouldReturnsAnAppointmentWhenValidDataIsProvided(){
-        String validSpotId = "valid_id";
-        AppointmentResponseDto responseDto = spotService.addAppointment(validSpotId, this.validAppointmentRequestDto);
-        Assertions.asse
-    }
 
-     */
+
 
 
 

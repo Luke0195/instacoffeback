@@ -6,7 +6,7 @@ import br.com.instacoffe.app.dtos.response.UserResponseDto;
 
 import java.util.Date;
 
-public class UserFactory {
+public class UserFactory{
 
     private UserFactory(){}
 
