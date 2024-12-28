@@ -1,8 +1,8 @@
 package br.com.instacoffe.app.dtos.request;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 
 
 public record AppointmentRequestDto(
@@ -10,7 +10,9 @@ public record AppointmentRequestDto(
         @JsonProperty("user_id")
         String userId,
         @NotEmpty(message = "The field date must be required")
-        @JsonFormat(pattern = "yyyy-mm-dd")
+        @Pattern(
+                regexp = "\\d{4}-\\d{2}-\\d{2}",
+                message = "Date must be in the format yyyy-MM-dd")
         String date) {
 
     @Override

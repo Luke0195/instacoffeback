@@ -77,4 +77,5 @@ class SpotControllerTest {
         ResultActions resultActions = mockMvc.perform(get("/spots").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON));
         resultActions.andExpect(status().isOk());
     }
+
 }

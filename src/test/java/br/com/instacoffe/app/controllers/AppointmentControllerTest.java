@@ -45,4 +45,32 @@ public class AppointmentControllerTest {
        resultActions.andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
+    @DisplayName("POST- Should returns 400 if no date is provided")
+    @Test
+    void addAppointmentUseCaseShouldReturnsBadRequestIfNoDateIsProvided() throws Exception{
+        AppointmentRequestDto appointmentRequestDto = new AppointmentRequestDto("any_id", null);
+        String jsonBody = objectMapper.writeValueAsString(appointmentRequestDto);
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/spots/1/appointment")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonBody));
+        resultActions.andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @DisplayName("POST - Should returns 400 if invalid date is provided")
+    @Test
+    void addAppointmentUseCaseShouldReturnsBadRequestIfInvalidDateIsProvided() throws Exception{
+        AppointmentRequestDto appointmentRequestDto = new AppointmentRequestDto("user_id", "any_date");
+        String invalidJson = objectMapper.writeValueAsString(appointmentRequestDto);
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/spots/1/appointment")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(invalidJson)
+        );
+        resultActions.andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+
+
+
 }

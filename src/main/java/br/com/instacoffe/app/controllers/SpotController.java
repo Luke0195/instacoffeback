@@ -35,7 +35,7 @@ public class SpotController {
 
     @PostMapping(value = "/{spotId}/appointment")
     public ResponseEntity<AppointmentResponseDto> addAppointment(@PathVariable String spotId, @Valid @RequestBody AppointmentRequestDto appointmentRequestDto){
-        service.addAppointment(appointmentRequestDto);
+        service.addAppointment(spotId, appointmentRequestDto);
         return null;
     }
 

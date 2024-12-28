@@ -4,5 +4,5 @@ import br.com.instacoffe.app.dtos.request.AppointmentRequestDto;
 import br.com.instacoffe.app.dtos.response.AppointmentResponseDto;
 
 public interface AddAppointmentUseCase {
-    AppointmentResponseDto addAppointment(AppointmentRequestDto appointmentRequestDto);
+    AppointmentResponseDto addAppointment(String spotId, AppointmentRequestDto appointmentRequestDto);
 }
