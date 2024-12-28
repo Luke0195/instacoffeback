@@ -1,21 +1,22 @@
 package br.com.instacoffe.app.controllers;
 
+import br.com.instacoffe.app.dtos.request.AppointmentRequestDto;
 import br.com.instacoffe.app.dtos.request.SpotRequestDto;
+import br.com.instacoffe.app.dtos.response.AppointmentResponseDto;
 import br.com.instacoffe.app.dtos.response.SpotResponseDto;
 import br.com.instacoffe.app.services.SpotService;
+import br.com.instacoffe.app.utils.http.HttpUtil;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/spots")
+@AllArgsConstructor
 public class SpotController {
 
     @Autowired
@@ -24,14 +25,18 @@ public class SpotController {
     @PostMapping
     public ResponseEntity<SpotResponseDto> addSpot(@Valid @RequestBody SpotRequestDto spotRequestDto){
       SpotResponseDto spotResponseDto = service.add(spotRequestDto);
-      URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(spotResponseDto.id()).toUri();
-      return ResponseEntity.created(uri).body(spotResponseDto);
+      return HttpUtil.created(spotResponseDto, spotResponseDto.id());
     }
 
     @GetMapping
     public ResponseEntity<List<SpotResponseDto>> loadSpots(){
-        List<SpotResponseDto> spots = service.findAllUsers();
-        return ResponseEntity.status(HttpStatus.OK).body(spots);
+        return HttpUtil.ok(service.findAllUsers());
+    }
+
+    @PostMapping(value = "/{spotId}/appointment")
+    public ResponseEntity<AppointmentResponseDto> addAppointment(@PathVariable String spotId, @Valid @RequestBody AppointmentRequestDto appointmentRequestDto){
+        service.addAppointment(appointmentRequestDto);
+        return null;
     }
 
 }

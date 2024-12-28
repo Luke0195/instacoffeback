@@ -3,7 +3,6 @@ package br.com.instacoffe.app.dtos.request;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-import java.math.BigDecimal;
 
 public record SpotRequestDto(
         @NotEmpty(message = "The field name must be required")

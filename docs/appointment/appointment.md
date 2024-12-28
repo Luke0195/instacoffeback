@@ -3,7 +3,7 @@
 > ### Casos de Sucesso.
 
 
-- [ ] Recebe uma requisição do tipo <b> POST </b> /spots/:spotId/appointment.
+- [X] Recebe uma requisição do tipo <b> POST </b> /spots/:spotId/appointment.
 - [ ] Valida os campos obrigatórios <b> userId</b>, <b>spotId</b>,<b> data</b>.
 - [ ] O agendamento do spot começa com reserva não aprovada.
 - [ ] Valida se o id do usuário existe.

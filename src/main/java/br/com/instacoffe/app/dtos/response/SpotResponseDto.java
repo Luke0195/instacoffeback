@@ -1,6 +1,5 @@
 package br.com.instacoffe.app.dtos.response;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public record SpotResponseDto(

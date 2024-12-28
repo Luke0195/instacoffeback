@@ -4,7 +4,13 @@ package br.com.instacoffe.app.dtos.response;
 import java.time.Instant;
 import java.util.Set;
 
-public record StandardResponseErrorDto(Instant timestamp, Integer status, String error, String message, String path, Set<FieldResponseDto> errors) {
+public record StandardResponseErrorDto(
+        Instant timestamp,
+        Integer status,
+        String error,
+        String message,
+        String path,
+        Set<FieldResponseDto> errors) {
 
     @Override
     public Instant timestamp() {

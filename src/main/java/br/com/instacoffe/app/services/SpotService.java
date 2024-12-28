@@ -4,7 +4,9 @@ import br.com.instacoffe.app.domain.models.Spot;
 import br.com.instacoffe.app.domain.usecases.appointment.AddAppointmentUseCase;
 import br.com.instacoffe.app.domain.usecases.spots.AddSpotUseCase;
 import br.com.instacoffe.app.domain.usecases.spots.LoadSpotsUseCase;
+import br.com.instacoffe.app.dtos.request.AppointmentRequestDto;
 import br.com.instacoffe.app.dtos.request.SpotRequestDto;
+import br.com.instacoffe.app.dtos.response.AppointmentResponseDto;
 import br.com.instacoffe.app.dtos.response.SpotResponseDto;
 
 import br.com.instacoffe.app.repositories.SpotRepository;
@@ -29,7 +31,8 @@ public class SpotService implements AddSpotUseCase, LoadSpotsUseCase, AddAppoint
        if(findSpotByName.isPresent()) throw new ResourceAlreadyExistsException("This name is already taken!");
        Spot spot = makeSpot(spotRequestDto);
        spot = repository.save(spot);
-       return new SpotResponseDto(spot.getId(), spot.getName(), spot.getThumbnail(), spot.getPrice(), spot.getTechs(), spot.getCreatedAt(), spot.getUpdatedAt());
+       return new SpotResponseDto(spot.getId(), spot.getName(), spot.getThumbnail(), spot.getPrice(),
+               spot.getTechs(), spot.getCreatedAt(), spot.getUpdatedAt());
     }
 
     @Override
@@ -55,7 +58,7 @@ public class SpotService implements AddSpotUseCase, LoadSpotsUseCase, AddAppoint
 
 
     @Override
-    public Object addAppointment(Object object) {
+    public AppointmentResponseDto addAppointment(AppointmentRequestDto object) {
         return null;
     }
 }

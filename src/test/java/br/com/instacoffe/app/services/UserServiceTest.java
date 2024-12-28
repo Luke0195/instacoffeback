@@ -4,7 +4,7 @@ import br.com.instacoffe.app.domain.models.User;
 import br.com.instacoffe.app.dtos.request.UserRequestDto;
 import br.com.instacoffe.app.dtos.response.UserResponseDto;
 import br.com.instacoffe.app.repositories.UserRepository;
-import jakarta.annotation.sql.DataSourceDefinition;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
