@@ -488,3 +488,40 @@ Caused by: java.net.ConnectException: Connection refused
 	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:79) ~[mongodb-driver-core-5.2.1.jar:na]
 	... 3 common frames omitted
 
+2024-12-27T04:04:08.003-05:00  INFO 54055 --- [app] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-27T04:04:08.005-05:00  INFO 54055 --- [app] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2024-12-27T04:04:10.289-05:00  INFO 55191 --- [app] [main] br.com.instacoffe.app.AppApplication     : Starting AppApplication using Java 17.0.13 with PID 55191 (/home/lucas/projects/instacoffee/backend/target/classes started by lucas in /home/lucas/projects/instacoffee/backend)
+2024-12-27T04:04:10.290-05:00  INFO 55191 --- [app] [main] br.com.instacoffe.app.AppApplication     : No active profile set, falling back to 1 default profile: "default"
+2024-12-27T04:04:10.712-05:00  INFO 55191 --- [app] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2024-12-27T04:04:10.751-05:00  INFO 55191 --- [app] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 2 MongoDB repository interfaces.
+2024-12-27T04:04:11.023-05:00  INFO 55191 --- [app] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-12-27T04:04:11.034-05:00  INFO 55191 --- [app] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-27T04:04:11.034-05:00  INFO 55191 --- [app] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2024-12-27T04:04:11.062-05:00  INFO 55191 --- [app] [main] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2024-12-27T04:04:11.069-05:00  INFO 55191 --- [app] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 733 ms
+2024-12-27T04:04:11.200-05:00  INFO 55191 --- [app] [cluster-ClusterId{value='676e6d8b96a9e811250f8d8a', description='null'}-localhost:27017] org.mongodb.driver.cluster               : Exception in monitor thread while connecting to server localhost:27017
+
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.internal.connection.SocketStream.lambda$open$0(SocketStream.java:85) ~[mongodb-driver-core-5.2.1.jar:na]
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[na:na]
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:85) ~[mongodb-driver-core-5.2.1.jar:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:233) ~[mongodb-driver-core-5.2.1.jar:na]
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitor.lookupServerDescription(DefaultServerMonitor.java:219) ~[mongodb-driver-core-5.2.1.jar:na]
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitor.run(DefaultServerMonitor.java:176) ~[mongodb-driver-core-5.2.1.jar:na]
+Caused by: java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:547) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:602) ~[na:na]
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327) ~[na:na]
+	at java.base/java.net.Socket.connect(Socket.java:639) ~[na:na]
+	at com.mongodb.internal.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:76) ~[mongodb-driver-core-5.2.1.jar:na]
+	at com.mongodb.internal.connection.SocketStream.initializeSocket(SocketStream.java:104) ~[mongodb-driver-core-5.2.1.jar:na]
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:79) ~[mongodb-driver-core-5.2.1.jar:na]
+	... 3 common frames omitted
+
+2024-12-27T04:04:11.202-05:00  INFO 55191 --- [app] [main] org.mongodb.driver.client                : MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "5.2.1"}, "os": {"type": "Linux", "name": "Linux", "architecture": "amd64", "version": "6.1.0-28-amd64"}, "platform": "Java/Azul Systems, Inc./17.0.13+11-LTS"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=MongoCredential{mechanism=null, userName='root', source='admin', password=<hidden>, mechanismProperties=<hidden>}, transportSettings=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@64ae105d, com.mongodb.Jep395RecordCodecProvider@10a18e3e, com.mongodb.KotlinCodecProvider@69364b2d]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverMonitoringMode=AUTO, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null, timeoutMS=null}
+2024-12-27T04:04:11.723-05:00  INFO 55191 --- [app] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/api'
+2024-12-27T04:04:11.731-05:00  INFO 55191 --- [app] [main] br.com.instacoffe.app.AppApplication     : Started AppApplication in 1.805 seconds (process running for 2.59)
+2024-12-27T04:04:12.747-05:00  INFO 55191 --- [app] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2024-12-27T04:04:12.752-05:00  INFO 55191 --- [app] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
