@@ -4,6 +4,7 @@ import br.com.instacoffe.app.domain.models.Spot;
 import br.com.instacoffe.app.dtos.request.AppointmentRequestDto;
 import br.com.instacoffe.app.dtos.request.SpotRequestDto;
 
+import br.com.instacoffe.app.dtos.response.AppointmentResponseDto;
 import br.com.instacoffe.app.dtos.response.SpotResponseDto;
 import br.com.instacoffe.app.repositories.SpotRepository;
 import br.com.instacoffe.app.repositories.UserRepository;
@@ -44,10 +45,13 @@ class SpotServiceTest {
 
     private AppointmentRequestDto validAppointmentRequestDto;
 
+    private AppointmentResponseDto appointmentResponseDto;
 
     private void setUpValues(){
         this.existingSpot = new Spot("any_id", "any_name", "any_thumbnail", 30.0, new String[]{"java"}, new Date(), null);
-        this.validAppointmentRequestDto = new AppointmentRequestDto("valid_id", "2024-12-28");
+        this.validAppointmentRequestDto = new AppointmentRequestDto("valid_user_id", "2024-12-28");
+
+
     }
 
     @BeforeEach
@@ -107,6 +111,16 @@ class SpotServiceTest {
         });
     }
 
+    /*
+    @DisplayName("addAppointment should returns an appointment when valid data is provided")
+    @Test
+    void addAppointmentShouldReturnsAnAppointmentWhenValidDataIsProvided(){
+        String validSpotId = "valid_id";
+        AppointmentResponseDto responseDto = spotService.addAppointment(validSpotId, this.validAppointmentRequestDto);
+        Assertions.asse
+    }
+
+     */
 
 
 
