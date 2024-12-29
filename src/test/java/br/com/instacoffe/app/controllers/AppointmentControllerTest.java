@@ -31,13 +31,24 @@ public class AppointmentControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-
+    @DisplayName("POST - Should returns 404 if no invalid route is provided")
+    @Test
+    void addAppointmentUseCaseShouldReturnsNotFoundIfInvalidRouteIsProvided()throws Exception {
+        AppointmentRequestDto appointmentRequestDto = new AppointmentRequestDto(null, "2024-12-28");
+        String jsonBody = objectMapper.writeValueAsString(appointmentRequestDto);
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/spots/1/appointment")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonBody)
+        );
+        resultActions.andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
     @DisplayName("POST - Should returns 400 if no  user_id is provided")
     @Test
     void addAppointmentUseCaseShouldReturnsBadRequestIfNoUserIdIsProvided() throws Exception{
         AppointmentRequestDto appointmentRequestDto = new AppointmentRequestDto(null, "2024-12-28");
         String jsonBody = objectMapper.writeValueAsString(appointmentRequestDto);
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/spots/1/appointment")
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/spots/1/bookings")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonBody)
@@ -50,7 +61,7 @@ public class AppointmentControllerTest {
     void addAppointmentUseCaseShouldReturnsBadRequestIfNoDateIsProvided() throws Exception{
         AppointmentRequestDto appointmentRequestDto = new AppointmentRequestDto("any_id", null);
         String jsonBody = objectMapper.writeValueAsString(appointmentRequestDto);
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/spots/1/appointment")
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/spots/1/bookings")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonBody));
@@ -62,7 +73,7 @@ public class AppointmentControllerTest {
     void addAppointmentUseCaseShouldReturnsBadRequestIfInvalidDateIsProvided() throws Exception{
         AppointmentRequestDto appointmentRequestDto = new AppointmentRequestDto("user_id", "any_date");
         String invalidJson = objectMapper.writeValueAsString(appointmentRequestDto);
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/spots/1/appointment")
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.post("/spots/1/bookings")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(invalidJson)

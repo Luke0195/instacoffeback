@@ -33,10 +33,11 @@ public class SpotController {
         return HttpUtil.ok(service.findAllUsers());
     }
 
-    @PostMapping(value = "/{spotId}/appointment")
+    @PostMapping(value = "/{spotId}/bookings")
     public ResponseEntity<AppointmentResponseDto> addAppointment(@PathVariable String spotId, @Valid @RequestBody AppointmentRequestDto appointmentRequestDto){
-        service.addAppointment(spotId, appointmentRequestDto);
-        return null;
+
+       AppointmentResponseDto appointmentResponseDto =  service.addAppointment(spotId, appointmentRequestDto);
+       return HttpUtil.created(appointmentResponseDto, appointmentResponseDto.id());
     }
 
 }
