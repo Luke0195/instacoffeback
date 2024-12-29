@@ -3,6 +3,7 @@ package br.com.instacoffe.app.controllers.exceptions;
 import br.com.instacoffe.app.dtos.response.FieldResponseDto;
 import br.com.instacoffe.app.dtos.response.StandardResponseErrorDto;
 import br.com.instacoffe.app.services.exceptions.ResourceAlreadyExistsException;
+import br.com.instacoffe.app.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,12 @@ public class InstaCoffeeExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseErrorDto);
     }
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<StandardResponseErrorDto> handleEntityNotFound(HttpServletRequest request, ResourceNotFoundException exception){
+        StandardResponseErrorDto responseErrorDto = makeStandardResponseErrorDto(HttpStatus.NOT_FOUND.value(), "Entity not found!", exception.getMessage(), request.getRequestURI(), new HashSet<>());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseErrorDto);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<StandardResponseErrorDto> handleMethodArgumentException(HttpServletRequest request, MethodArgumentNotValidException exception){
         Set<FieldResponseDto> errors = new HashSet<>();
@@ -39,6 +46,7 @@ public class InstaCoffeeExceptionHandler {
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(standardResponseDto);
     }
+
 
 
 

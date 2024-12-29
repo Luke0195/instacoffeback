@@ -1,11 +1,14 @@
 package br.com.instacoffe.app.dtos.response;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.Instant;
 import java.util.Set;
 
 public record StandardResponseErrorDto(
         Instant timestamp,
+        @JsonProperty("status_code")
         Integer status,
         String error,
         String message,
