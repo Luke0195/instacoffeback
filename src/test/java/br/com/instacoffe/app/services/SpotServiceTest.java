@@ -4,7 +4,6 @@ import br.com.instacoffe.app.domain.models.Spot;
 import br.com.instacoffe.app.dtos.request.AppointmentRequestDto;
 import br.com.instacoffe.app.dtos.request.SpotRequestDto;
 
-import br.com.instacoffe.app.dtos.response.AppointmentResponseDto;
 import br.com.instacoffe.app.dtos.response.SpotResponseDto;
 import br.com.instacoffe.app.factories.SpotFactory;
 import br.com.instacoffe.app.repositories.SpotRepository;
